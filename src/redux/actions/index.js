@@ -5,4 +5,5 @@ const emailChanged = (email) => ({
   type: EMAIL_CHANGED,
   payload: email,
 });
+
 export default emailChanged;
