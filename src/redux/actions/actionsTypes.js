@@ -1,0 +1,3 @@
+const EMAIL_CHANGED = 'EMAIL_CHANGED';
+
+export default EMAIL_CHANGED;
