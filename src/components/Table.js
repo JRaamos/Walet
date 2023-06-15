@@ -1,26 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import propTypes from 'prop-types';
+import HedlerAddExpense from './HedlerAddExpense';
 
 class Table extends Component {
-  hedlerAddExpense = () => {
-    const { expenses } = this.props;
-    return expenses.map(
-      ({ id, description, tag, method, value, exchangeRates, currency }) => (
-        <tr key={ id }>
-          <td>{description}</td>
-          <td>{tag}</td>
-          <td>{method}</td>
-          <td>{Number(value).toFixed(2)}</td>
-          <td>{exchangeRates[currency].name}</td>
-          <td>{Number(exchangeRates[currency].ask).toFixed(2)}</td>
-          <td>{Number(exchangeRates[currency].ask * value).toFixed(2)}</td>
-          <td>Real</td>
-        </tr>
-      ),
-    );
-  };
-
   render() {
     return (
       <div>
@@ -42,17 +23,12 @@ class Table extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.hedlerAddExpense()}
+            <HedlerAddExpense />
           </tbody>
         </table>
       </div>
     );
   }
 }
-const mapStateToProps = (state) => ({
-  expenses: state.wallet.expenses,
-});
 
-Table.propTypes = propTypes.shape({}).isRequired;
-
-export default connect(mapStateToProps)(Table);
+export default Table;

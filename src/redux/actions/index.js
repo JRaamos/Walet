@@ -1,5 +1,6 @@
 // Coloque aqui suas actions
-import { ADD_EXPENSE, EMAIL_CHANGED, WALLET_CHANGED } from './actionsTypes';
+import { ADD_EXPENSE, DELETE_EXPENSE,
+  EMAIL_CHANGED, WALLET_CHANGED } from './actionsTypes';
 
 export const emailChanged = (email) => ({
   type: EMAIL_CHANGED,
@@ -19,5 +20,10 @@ export const fetchApi = () => async (dispatch) => {
 
 export const addExpense = (expense) => ({
   type: ADD_EXPENSE,
+  payload: expense,
+});
+
+export const deleteExpense = (expense) => ({
+  type: DELETE_EXPENSE,
   payload: expense,
 });
