@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import emailChanged from '../redux/actions';
+import { emailChanged } from '../redux/actions';
 
 class Login extends Component {
   state = {
@@ -33,7 +33,6 @@ class Login extends Component {
     const buttonCheckCaracter = 6;
     const { email, password } = this.state;
     const emailValidation = /.+@[A-z]+[.]com/;
-    console.log(emailValidation.test(email));
     if (emailValidation.test(email) && password.length >= buttonCheckCaracter) {
       this.setState({ emailValidation: false });
     } else {

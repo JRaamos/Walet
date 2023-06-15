@@ -1,9 +1,19 @@
 // Coloque aqui suas actions
-import EMAIL_CHANGED from './actionsTypes';
+import { EMAIL_CHANGED, WALLET_CHANGED } from './actionsTypes';
 
-const emailChanged = (email) => ({
+export const emailChanged = (email) => ({
   type: EMAIL_CHANGED,
   payload: email,
 });
 
-export default emailChanged;
+export const walletChanged = (wallet) => ({
+  type: WALLET_CHANGED,
+  payload: wallet,
+});
+
+export const fetchApi = () => async (dispatch) => {
+  const response = await fetch('https://economia.awesomeapi.com.br/json/all');
+  const data = await response.json();
+  const currencies = Object.keys(data).filter((moeda) => moeda !== 'USDT');
+  dispatch(walletChanged(currencies));
+};
