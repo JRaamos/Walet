@@ -29,6 +29,7 @@ class Header extends Component {
               (expense) => expense.value,
             )
           }
+          0
         </p>
         <p data-testid="header-currency-field">BRL</p>
       </div>
