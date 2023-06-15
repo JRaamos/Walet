@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
-import store from '../redux/store';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class Header extends Component {
-  state = {
-    email: '',
-    expenses: [],
+  hadleTotal = () => {
+    const { expenses } = this.props;
+    return expenses.reduce((acc, curr) => {
+      const { value, currency, exchangeRates } = curr;
+      const exchangeRate = exchangeRates[currency].ask;
+      return acc + +value * +exchangeRate;
+    }, 0);
   };
 
-  componentDidMount() {
-    const { email } = store.getState().user;
-    const { expenses } = store.getState().wallet;
-    this.setState({ email, expenses });
-    console.log(expenses);
-  }
-
   render() {
-    const { email, expenses } = this.state;
+    const { email } = this.props;
     return (
       <div>
         <p
@@ -24,17 +22,18 @@ class Header extends Component {
           { email }
         </p>
         <p data-testid="total-field">
-          {
-            expenses.map(
-              (expense) => expense.value,
-            )
-          }
-          0
+          { this.hadleTotal().toFixed(2)}
         </p>
         <p data-testid="header-currency-field">BRL</p>
       </div>
     );
   }
 }
+const mapStateToProps = (state) => ({
+  email: state.user.email,
+  expenses: state.wallet.expenses,
+});
 
-export default Header;
+Header.propTypes = PropTypes.shape({}).isRequired;
+
+export default connect(mapStateToProps)(Header);

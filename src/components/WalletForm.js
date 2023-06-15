@@ -5,41 +5,25 @@ import { addExpense, fetchApi } from '../redux/actions';
 
 class WalletForm extends Component {
   state = {
-    value: 0,
+    value: '',
     description: '',
     currency: 'USD',
     method: 'Dinheiro',
     tag: 'Alimentação',
-    exchangeRates: {},
   };
 
   componentDidMount() {
-    this.handleApi();
     const { dispatch } = this.props;
     dispatch(fetchApi());
   }
 
-  handleApi = async () => {
-    const { currencies } = this.props;
-    const response = await fetch('https://economia.awesomeapi.com.br/json/all');
-    const data = await response.json();
-    currencies.forEach((moeda) => {
-      this.setState((state) => ({
-        exchangeRates: {
-          ...state.exchangeRates,
-          [moeda]: data[moeda],
-        },
-      }));
-    });
-  };
-
   handleChange = ({ target: { name, value } }) => this.setState({ [name]: value });
 
   handleExpenses = () => {
-    this.handleApi();
-    const { dispatch, expenses } = this.props;
+    const { dispatch, expenses, currencies } = this.props;
+    dispatch(fetchApi());
     const id = expenses.length;
-    const { value, description, currency, method, tag, exchangeRates } = this.state;
+    const { value, description, currency, method, tag } = this.state;
     const expense = {
       id,
       value,
@@ -47,9 +31,16 @@ class WalletForm extends Component {
       currency,
       method,
       tag,
-      exchangeRates,
+      exchangeRates: currencies,
     };
     dispatch(addExpense(expense));
+    this.setState({
+      value: '',
+      description: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
+    });
   };
 
   render() {
@@ -87,9 +78,13 @@ class WalletForm extends Component {
               onChange={ this.handleChange }
               data-testid="currency-input"
             >
-              {currencies.map((moeda) => (
-                <option key={ moeda }>{moeda}</option>
-              ))}
+              {
+                Object.keys(currencies)
+                  .filter((moeda) => moeda !== 'USDT')
+                  .map((moeda) => (
+                    <option key={ moeda }>{moeda}</option>
+                  ))
+              }
             </select>
           </label>
           <label>
@@ -132,10 +127,6 @@ const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
 
-WalletForm.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
-  expenses: PropTypes.arrayOf.isRequired,
-};
+WalletForm.propTypes = PropTypes.shape({}).isRequired;
 
 export default connect(mapStateToProps)(WalletForm);

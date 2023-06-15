@@ -14,8 +14,7 @@ export const walletChanged = (wallet) => ({
 export const fetchApi = () => async (dispatch) => {
   const response = await fetch('https://economia.awesomeapi.com.br/json/all');
   const data = await response.json();
-  const currencies = Object.keys(data).filter((moeda) => moeda !== 'USDT');
-  dispatch(walletChanged(currencies));
+  dispatch(walletChanged(data));
 };
 
 export const addExpense = (expense) => ({
