@@ -20,7 +20,7 @@ class WalletForm extends Component {
   handleChange = ({ target: { name, value } }) => this.setState({ [name]: value });
 
   handleExpenses = () => {
-    const { dispatch, expenses, currencies } = this.props;
+    const { dispatch, expenses, data } = this.props;
     dispatch(fetchApi());
     const id = expenses.length;
     const { value, description, currency, method, tag } = this.state;
@@ -31,7 +31,7 @@ class WalletForm extends Component {
       currency,
       method,
       tag,
-      exchangeRates: currencies,
+      exchangeRates: data,
     };
     dispatch(addExpense(expense));
     this.setState({
@@ -79,11 +79,9 @@ class WalletForm extends Component {
               data-testid="currency-input"
             >
               {
-                Object.keys(currencies)
-                  .filter((moeda) => moeda !== 'USDT')
-                  .map((moeda) => (
-                    <option key={ moeda }>{moeda}</option>
-                  ))
+                currencies.map((moeda) => (
+                  <option key={ moeda }>{moeda}</option>
+                ))
               }
             </select>
           </label>
@@ -125,6 +123,7 @@ class WalletForm extends Component {
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
   expenses: state.wallet.expenses,
+  data: state.wallet.data,
 });
 
 WalletForm.propTypes = PropTypes.shape({}).isRequired;
