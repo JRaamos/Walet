@@ -1,6 +1,8 @@
 // Coloque aqui suas actions
 import { ADD_EXPENSE, DELETE_EXPENSE,
-  EMAIL_CHANGED, WALLET_CHANGED } from './actionsTypes';
+  EDIT,
+  EDIT_EXPENSE,
+  EMAIL_CHANGED, EXPENSES_CHANGED, SAVE_EDIT, WALLET_CHANGED } from './actionsTypes';
 
 export const emailChanged = (email) => ({
   type: EMAIL_CHANGED,
@@ -26,4 +28,23 @@ export const addExpense = (expense) => ({
 export const deleteExpense = (expense) => ({
   type: DELETE_EXPENSE,
   payload: expense,
+});
+
+export const editExpense = (expense) => ({
+  type: EDIT_EXPENSE,
+  payload: expense,
+});
+
+export const saveEdit = (expense) => ({
+  type: SAVE_EDIT,
+  payload: expense,
+});
+export const expensesChanged = (expense) => ({
+  type: EXPENSES_CHANGED,
+  payload: expense,
+});
+
+export const editorState = () => ({
+  type: EDIT,
+
 });

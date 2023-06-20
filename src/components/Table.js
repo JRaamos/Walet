@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import HedlerAddExpense from './HedlerAddExpense';
+import PopulateTable from './PopulateTable';
 
 class Table extends Component {
   render() {
@@ -23,7 +23,7 @@ class Table extends Component {
             </tr>
           </thead>
           <tbody>
-            <HedlerAddExpense />
+            <PopulateTable />
           </tbody>
         </table>
       </div>
