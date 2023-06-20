@@ -66,15 +66,28 @@ describe('<Wallet/>', () => {
     expect(descricaoIdTeste).toBeInTheDocument();
 
     const buttonEditar = screen.getByRole('button', { name: 'Editar' });
-    const buttonExcluir = screen.getByRole('button', { name: 'Excluir' });
+
     userEvent.click(buttonEditar);
 
     const buttonSalvar = screen.getByRole('button', { name: 'Editar despesa' });
     expect(buttonSalvar).toBeInTheDocument();
 
-    userEvent.type(inputValor, '20');
+    userEvent.selectOptions(tag, 'Lazer');
+    userEvent.type(inputDescricao, 'idTeste');
+    userEvent.selectOptions(method, 'Cartão de crédito');
     userEvent.click(buttonSalvar);
 
+    const newTagAlimentacao = screen.getByRole('cell', { name: 'Lazer' });
+    const cartao = screen.getByRole('cell', { name: 'Cartão de crédito' });
+
+    expect(newTagAlimentacao).toBeInTheDocument();
+    expect(cartao).toBeInTheDocument();
+
+    const buttonExcluir = screen.getByRole('button', { name: 'Excluir' });
+
     userEvent.click(buttonExcluir);
+
+    expect(newTagAlimentacao).not.toBeInTheDocument();
+    expect(cartao).not.toBeInTheDocument();
   });
 });
