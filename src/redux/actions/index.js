@@ -2,7 +2,7 @@
 import { ADD_EXPENSE, DELETE_EXPENSE,
   EDIT,
   EDIT_EXPENSE,
-  EMAIL_CHANGED, EXPENSES_CHANGED, SAVE_EDIT, WALLET_CHANGED } from './actionsTypes';
+  EMAIL_CHANGED, SAVE_EDIT, WALLET_CHANGED } from './actionsTypes';
 
 export const emailChanged = (email) => ({
   type: EMAIL_CHANGED,
@@ -37,10 +37,6 @@ export const editExpense = (expense) => ({
 
 export const saveEdit = (expense) => ({
   type: SAVE_EDIT,
-  payload: expense,
-});
-export const expensesChanged = (expense) => ({
-  type: EXPENSES_CHANGED,
   payload: expense,
 });
 
