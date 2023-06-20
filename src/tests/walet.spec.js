@@ -54,5 +54,27 @@ describe('<Wallet/>', () => {
     userEvent.selectOptions(method, 'Dinheiro');
     userEvent.selectOptions(tag, 'Alimentação');
     userEvent.click(buttonDespesa);
+
+    const tagAlimentacao = screen.getByRole('cell', { name: 'Alimentação' });
+    const methodDinheiro = screen.getByRole('cell', { name: 'Dinheiro' });
+    const valorDez = screen.getByRole('cell', { name: '10.00' });
+    const descricaoIdTeste = screen.getByRole('cell', { name: 'idTeste' });
+
+    expect(tagAlimentacao).toBeInTheDocument();
+    expect(methodDinheiro).toBeInTheDocument();
+    expect(valorDez).toBeInTheDocument();
+    expect(descricaoIdTeste).toBeInTheDocument();
+
+    const buttonEditar = screen.getByRole('button', { name: 'Editar' });
+    const buttonExcluir = screen.getByRole('button', { name: 'Excluir' });
+    userEvent.click(buttonEditar);
+
+    const buttonSalvar = screen.getByRole('button', { name: 'Editar despesa' });
+    expect(buttonSalvar).toBeInTheDocument();
+
+    userEvent.type(inputValor, '20');
+    userEvent.click(buttonSalvar);
+
+    userEvent.click(buttonExcluir);
   });
 });

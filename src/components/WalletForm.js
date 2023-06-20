@@ -9,7 +9,7 @@ class WalletForm extends Component {
     description: '',
     currency: 'USD',
     method: 'Dinheiro',
-    tag: 'Alimentação',
+    tag: '',
   };
 
   componentDidMount() {
@@ -69,6 +69,13 @@ class WalletForm extends Component {
     const newExpense = expenses.filter((expense) => expense.id !== idToEdit.id);
     const newExpenses = [...newExpense, expenseEdit];
     dispatch(saveEdit(newExpenses.sort((a, b) => a.id - b.id)));
+    this.setState({
+      value: '',
+      description: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
+    });
   };
 
   render() {

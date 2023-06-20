@@ -1,5 +1,4 @@
 import { ADD_EXPENSE, DELETE_EXPENSE,
-  EDIT,
   EDIT_EXPENSE,
   SAVE_EDIT,
   WALLET_CHANGED } from '../actions/actionsTypes';
@@ -30,8 +29,7 @@ const wallet = (state = INITIAL_STATE, action) => {
     return { ...state,
       editor: true,
       idToEdit: action.payload };
-  case EDIT:
-    return { ...state, editor: false };
+
   case SAVE_EDIT:
     return {
       ...state,
