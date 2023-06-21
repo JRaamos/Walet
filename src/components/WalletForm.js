@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addExpense, editExpense, fetchApi, saveEdit } from '../redux/actions';
+import { addExpense, fetchApi, saveEdit } from '../redux/actions';
 
 class WalletForm extends Component {
   state = {
@@ -65,7 +65,6 @@ class WalletForm extends Component {
       tag,
       exchangeRates: expenses[idToEdit.id].exchangeRates,
     };
-    dispatch(editExpense(expenseEdit));
     const newExpense = expenses.filter((expense) => expense.id !== idToEdit.id);
     const newExpenses = [...newExpense, expenseEdit];
     dispatch(saveEdit(newExpenses.sort((a, b) => a.id - b.id)));
@@ -83,7 +82,7 @@ class WalletForm extends Component {
     const { value, description, method, currency, tag } = this.state;
 
     return (
-      <div>
+      <div className="wallet-contain">
         <form>
           <label>
             valor:

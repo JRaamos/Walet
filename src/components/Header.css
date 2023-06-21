@@ -1,0 +1,16 @@
+.header-contain {
+  background-color: rgb(198, 198, 198);
+  border: solid 1px rgb(31, 29, 29);
+  border-radius: 0 0 15px 15px;
+  box-shadow: 1px 1px 15px black;
+  display: flex;
+  height: 65px;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.header-paragraph {
+  display: flex;
+  justify-content: space-evenly;
+  width: 50%;
+}

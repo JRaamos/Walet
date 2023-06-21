@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PopulateTable from './PopulateTable';
+import './Table.css';
 
 class Table extends Component {
   render() {
@@ -9,17 +10,17 @@ class Table extends Component {
         <table>
           <thead>
             <tr>
-              <th>
+              <th className="table-th">
                 Descrição
               </th>
-              <th> Tag </th>
-              <th> Método de pagamento </th>
-              <th> Valor </th>
-              <th> Moeda </th>
-              <th> Câmbio utilizado </th>
-              <th> Valor convertido </th>
-              <th> Moeda de conversão </th>
-              <th> Editar/Excluir </th>
+              <th className="table-th"> Tag </th>
+              <th className="table-th"> Método de pagamento </th>
+              <th className="table-th"> Valor </th>
+              <th className="table-th"> Moeda </th>
+              <th className="table-th"> Câmbio utilizado </th>
+              <th className="table-th"> Valor convertido </th>
+              <th className="table-th"> Moeda de conversão </th>
+              <th className="table-th"> Editar/Excluir </th>
             </tr>
           </thead>
           <tbody>

@@ -3,6 +3,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { deleteExpense, editExpense } from '../redux/actions';
+import './PopulateTable.css';
 
 class PopulateTable extends Component {
   // função para deletar uma despesa
@@ -24,15 +25,17 @@ class PopulateTable extends Component {
       expenses.map(
         ({ id, description, tag, method, value, exchangeRates, currency }) => (
           <tr key={ id }>
-            <td>{description}</td>
-            <td>{tag}</td>
-            <td>{method}</td>
-            <td>{Number(value).toFixed(2)}</td>
-            <td>{exchangeRates[currency].name}</td>
-            <td>{Number(exchangeRates[currency].ask).toFixed(2)}</td>
-            <td>{Number(exchangeRates[currency].ask * value).toFixed(2)}</td>
-            <td>Real</td>
-            <td>
+            <td className="table-td">{description}</td>
+            <td className="table-td">{tag}</td>
+            <td className="table-td">{method}</td>
+            <td className="table-td">{Number(value).toFixed(2)}</td>
+            <td className="table-td">{exchangeRates[currency].name}</td>
+            <td className="table-td">{Number(exchangeRates[currency].ask).toFixed(2)}</td>
+            <td className="table-td">
+              {Number(exchangeRates[currency].ask * value).toFixed(2)}
+            </td>
+            <td className="table-td">Real</td>
+            <td className="table-td">
               <button
                 type="button"
                 onClick={ () => this.handleEdit(id) }
